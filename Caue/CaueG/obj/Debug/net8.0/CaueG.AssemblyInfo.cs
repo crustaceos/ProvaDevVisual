@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CaueG")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68f5635b334785244ef57abd3ca6e1bc827680ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("CaueG")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CaueG")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

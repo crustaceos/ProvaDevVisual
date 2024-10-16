@@ -1,5 +1,7 @@
+using CaueG;
 using CaueG.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,13 +35,30 @@ app.MapPost("/api/folha/cadastrar", ([FromBody]Folha folha, [FromServices] AppDa
     return Results.Created("", folha);
 });
 
-app.MapGet("/api/folha/listar", ([FromServices] AppDataContext ctx) =>
+app.MapGet("/api/folha/listar", async ([FromServices] AppDataContext ctx) =>
 {
-    if (ctx.Folhas.Count() > 0)
+    var folhas = await ctx.Folhas
+        .Include(f => f.Funcionario)
+        .ToListAsync();
+
+    if (folhas.Count > 0)
     {
-        return Results.Ok(ctx.Folhas.ToList());  
-        
+        var result = folhas.Select(f => new FolhaDto
+{
+    FolhaId = f.FolhaId,
+    SalarioBruto = f.SalarioBruto,
+    SalarioLiquido = f.SalarioLiquido,
+    FuncionarioNome = f.Funcionario?.Nome,
+    FuncionarioCpf = f.Funcionario?.Cpf,
+    ImpostoIrrf = f.ImpostoIrrf,
+    ImpostoInss = f.ImpostoInss,
+    ImpostoFgts = f.ImpostoFgts
+}).ToList();
+
+
+        return Results.Ok(result);
     }
+    
     return Results.NotFound();
 });
 

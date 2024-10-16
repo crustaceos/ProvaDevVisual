@@ -15,9 +15,9 @@ public class AppDataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Folha>()
-            .HasOne(f => f.Funcionario) 
-            .WithMany(f => f.Folhas) 
-            .HasForeignKey(f => f.FuncionarioId); 
+            .HasOne(f => f.Funcionario)
+            .WithMany(f => f.Folhas)
+            .HasForeignKey(f => f.FuncionarioId);
     }
 }
 
